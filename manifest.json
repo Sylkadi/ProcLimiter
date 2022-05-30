@@ -1,0 +1,11 @@
+﻿{
+	"name": "ProcLimiter",
+	"version_number": "1.0",
+	"website_url": "",
+	"description": "Gives certain items cooldowns, helps reduce lag in the late game.",
+	"dependencies": [
+		"bbepis-BepInExPack-5.4.9",
+		"tristanmcpherson-R2API-4.3.21",
+		"RiskofThunder-HookGenPatcher-1.2.1"
+	]
+}
