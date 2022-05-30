@@ -6,7 +6,7 @@ The idea of this mod was to reduce lag in the late game and give my pc a breathe
 
 This mod is configurable.
 
-For example the default cooldown value of Sticky Bomb is 0.2 seconds, so Sticky Bomb's is limited to procing 5 times a second.
+For example the default cooldown value of Sticky Bomb is 0.2 seconds, so Sticky Bomb's are limited to procing 5 times a second.
 
 If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181 
 
