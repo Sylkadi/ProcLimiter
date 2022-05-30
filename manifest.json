@@ -1,7 +1,7 @@
 ﻿{
 	"name": "ProcLimiter",
 	"version_number": "1.0",
-	"website_url": "",
+	"website_url": "https://github.com/Sylkadi/ProcLimiter",
 	"description": "Gives certain items cooldowns, helps reduce lag in the late game.",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.9",
