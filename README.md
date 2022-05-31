@@ -13,6 +13,7 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 ## Changelog
 
 **1.0.1**
+
 * Implemented Risk_Of_Options
 
 **1.0.0**
