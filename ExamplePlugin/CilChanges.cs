@@ -41,11 +41,13 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<int, DamageInfo, CharacterMaster, bool>>((itemCount, damageInfo, master) => {
                     bool roll = Util.CheckRoll(5f * itemCount * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
+                    if(Configuration.ApplyStickyBomb.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.StickyBomb)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.StickyBomb, Configuration.StickyBombCooldown.Value);
 
-                    if (body.HasBuff(Buffs.StickyBomb)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.StickyBomb, Configuration.StickyBombCooldown.Value);
-
+                    }
                     return roll;
                 });
 
@@ -72,11 +74,12 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
                     bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
-
-                    if (body.HasBuff(Buffs.AtgMissile)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.AtgMissile, Configuration.AtgMissileCooldown.Value);
-
+                    if(Configuration.ApplyAtgMissile.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.AtgMissile)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.AtgMissile, Configuration.AtgMissileCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -103,11 +106,12 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
                     bool roll = Util.CheckRoll(25f * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
-
-                    if (body.HasBuff(Buffs.Ukelele)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.Ukelele, Configuration.UkeleleCooldown.Value);
-
+                    if(Configuration.ApplyUkelele.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.Ukelele)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.Ukelele, Configuration.UkeleleCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -149,11 +153,12 @@ namespace ProcLimiter
                 c.EmitDelegate<Func<int, DamageInfo, CharacterMaster, bool>>((itemCount, damageInfo, master) => {
                     float chance = (1f - 100f / (100f + 20f * itemCount)) * 100f;
                     bool roll = Util.CheckRoll(chance * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
-
-                    if (body.HasBuff(Buffs.MeatHook)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.MeatHook, Configuration.MeathookCooldown.Value);
-
+                    if(Configuration.ApplyMeathook.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.MeatHook)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.MeatHook, Configuration.MeathookCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -180,11 +185,12 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
                     bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
-
-                    if (body.HasBuff(Buffs.MoltenPerforator)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.MoltenPerforator, Configuration.MoltenPerforatorCooldown.Value);
-
+                    if(Configuration.ApplyMoltenPerforator.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.MoltenPerforator)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.MoltenPerforator, Configuration.MoltenPerforatorCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -211,11 +217,12 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
                     bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
-
-                    if (body.HasBuff(Buffs.ChargedPerforator)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.ChargedPerforator, Configuration.ChargedPerforatorCooldown.Value);
-
+                    if(Configuration.ApplyChargedPerforator.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.ChargedPerforator)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.ChargedPerforator, Configuration.ChargedPerforatorCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -242,11 +249,13 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
                     bool roll = Util.CheckRoll(25f * damageInfo.procCoefficient, master);
-                    CharacterBody body = master.GetBody();
+                    if(Configuration.ApplyPolylute.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.PolyLute)) roll = false;
+                        if (roll) body.AddTimedBuff(Buffs.PolyLute, Configuration.PolyluteCooldown.Value);
 
-                    if (body.HasBuff(Buffs.PolyLute)) roll = false;
-                    if (roll) body.AddTimedBuff(Buffs.PolyLute, Configuration.PolyluteCooldown.Value);
-
+                    }
                     return roll;
                 });
 
@@ -270,12 +279,13 @@ namespace ProcLimiter
                 c.Emit(OpCodes.Ldloc, masterLocation);
                 c.EmitDelegate<Func<int, CharacterMaster, int>>((itemCount, master) => {
                     int roll = 0;
-                    CharacterBody body = master.GetBody();
                     if (itemCount > 0) roll = 1;
-                    if (body.HasBuff(Buffs.PlasmaShrimp)) roll = 0;
-
-                    if (roll >= 1) body.AddTimedBuff(Buffs.PlasmaShrimp, Configuration.PlasmaShrimpCooldown.Value);
-
+                    if(Configuration.ApplyPlasmaShrimp.Value && Configuration.ApplyAllChanges.Value)
+                    {
+                        CharacterBody body = master.GetBody();
+                        if (body.HasBuff(Buffs.PlasmaShrimp)) roll = 0;
+                        if (roll >= 1) body.AddTimedBuff(Buffs.PlasmaShrimp, Configuration.PlasmaShrimpCooldown.Value);
+                    }
                     return roll;
                 });
 
@@ -294,7 +304,11 @@ namespace ProcLimiter
                     v => v.MatchAdd()
                     );
                 c.Index++;
-                c.Next.Operand = Configuration.NkuhanaCooldown.Value;
+                c.Remove();
+                c.EmitDelegate<Func<float>>(() => {
+                    if(Configuration.ApplyNkuhana.Value && Configuration.ApplyAllChanges.Value) return Configuration.NkuhanaCooldown.Value;
+                    return 0.1f;
+                });
             };
         }
 

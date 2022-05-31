@@ -5,11 +5,13 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using BepInEx.Configuration;
+using RiskOfOptions.OptionConfigs;
+using RiskOfOptions;
 
 namespace ProcLimiter
 {
 
-    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency(R2API.R2API.PluginGUID, "com.rune580.riskofoptions")]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
     [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI))]
     public class Main : BaseUnityPlugin
@@ -18,7 +20,7 @@ namespace ProcLimiter
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Drinkable";
         public const string PluginName = "ProcLimiter";
-        public const string PluginVersion = "1.0";
+        public const string PluginVersion = "1.0.1";
 
         public static ConfigFile Config;
 
@@ -34,18 +36,19 @@ namespace ProcLimiter
 
             // Cil Changes
             CilChanges.GetMasterLocation();
-            if (Configuration.ApplyStickyBomb.Value) CilChanges.StickyBomb();
-            if (Configuration.ApplyAtgMissile.Value) CilChanges.AtgMissile();
-            if (Configuration.ApplyUkelele.Value) CilChanges.Ukelele();
-            if (Configuration.ApplyMeathook.Value) CilChanges.MeatHook();
-            if (Configuration.ApplyMoltenPerforator.Value) CilChanges.MoltenPerforator();
-            if (Configuration.ApplyChargedPerforator.Value) CilChanges.ChargedPerforator();
-            if (Configuration.ApplyPolylute.Value) CilChanges.PolyLute();
-            if (Configuration.ApplyPlasmaShrimp.Value) CilChanges.PlasmaShrimp();
-            if (Configuration.ApplyNkuhana.Value) CilChanges.Nkuhana();
+            CilChanges.StickyBomb();
+            CilChanges.AtgMissile();
+            CilChanges.Ukelele();
+            CilChanges.MeatHook();
+            CilChanges.MoltenPerforator();
+            CilChanges.ChargedPerforator();
+            CilChanges.PolyLute();
+            CilChanges.PlasmaShrimp();
+            CilChanges.Nkuhana();
 
             // Say done
             Log.LogInfo(PluginName + ": Awake done");
+
         }
     }
 }
