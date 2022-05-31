@@ -11,7 +11,7 @@ using RiskOfOptions;
 namespace ProcLimiter
 {
 
-    [BepInDependency(R2API.R2API.PluginGUID, "com.rune580.riskofoptions")]
+    [BepInDependency(R2API.R2API.PluginGUID)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
     [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI))]
     public class Main : BaseUnityPlugin
