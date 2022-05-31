@@ -12,7 +12,10 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 
 ## Changelog
 
-**1.0**
+**1.0.1**
+* Implemented Risk_Of_Options
+
+**1.0.0**
 
 * Initial release
 * Gave Sticky Bomb, AtG Missile Mk. 1, Ukelele, Sentinet Meat Hook, Molten Perforator, Charged Perforator, Plasma Shrimp, Polylute and N'kuhana's Opinion a cooldown.
