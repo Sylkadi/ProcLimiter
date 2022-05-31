@@ -75,7 +75,7 @@ namespace ProcLimiter
             ModSettingsManager.AddOption(new StepSliderOption(PlasmaShrimpCooldown, stepSlider));
 
             ModSettingsManager.AddOption(new CheckBoxOption(ApplyNkuhana));
-            ModSettingsManager.AddOption(new StepSliderOption(NkuhanaCooldown, stepSlider));
+            ModSettingsManager.AddOption(new StepSliderOption(NkuhanaCooldown, new StepSliderConfig { min = 0.1f, max = 2, increment = 0.01f, formatString = "{0}s"}));
 
         }
 
