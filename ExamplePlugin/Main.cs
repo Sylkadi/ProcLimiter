@@ -20,7 +20,7 @@ namespace ProcLimiter
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Drinkable";
         public const string PluginName = "ProcLimiter";
-        public const string PluginVersion = "1.0.1";
+        public const string PluginVersion = "1.1.0";
 
         public static ConfigFile Config;
 
@@ -35,16 +35,19 @@ namespace ProcLimiter
             Configuration.Initalize();
 
             // Cil Changes
-            CilChanges.GetMasterLocation();
-            CilChanges.StickyBomb();
-            CilChanges.AtgMissile();
-            CilChanges.Ukelele();
-            CilChanges.MeatHook();
-            CilChanges.MoltenPerforator();
-            CilChanges.ChargedPerforator();
-            CilChanges.PolyLute();
-            CilChanges.PlasmaShrimp();
-            CilChanges.Nkuhana();
+            Changes.Cil.GetMasterLocation();
+            Changes.Cil.StickyBomb();
+            Changes.Cil.AtgMissile();
+            Changes.Cil.Ukelele();
+            Changes.Cil.MeatHook();
+            Changes.Cil.MoltenPerforator();
+            Changes.Cil.ChargedPerforator();
+            Changes.Cil.PolyLute();
+            Changes.Cil.PlasmaShrimp();
+            Changes.Cil.Nkuhana();
+
+            // Other Changes
+            Changes.OnRemoveBuff();
 
             // Say done
             Log.LogInfo(PluginName + ": Awake done");
