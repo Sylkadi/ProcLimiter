@@ -2,6 +2,8 @@
 using RoR2;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using BepInEx.Configuration;
+using System.Linq;
 
 namespace ProcLimiter
 {
@@ -47,7 +49,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyStickyBomb.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if(body.GetBuffCount(Buffs.StickyBomb) < 5)
+                            if(body.GetBuffCount(Buffs.StickyBomb) < Configuration.StickyBombStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.StickyBombCD)) body.AddTimedBuff(Buffs.StickyBombCD, Configuration.StickyBombCooldown.Value);
                                 body.AddBuff(Buffs.StickyBomb);
@@ -82,7 +84,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyAtgMissile.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.AtgMissile) < 5)
+                            if (body.GetBuffCount(Buffs.AtgMissile) < Configuration.AtgMissileStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.AtgMissileCD)) body.AddTimedBuff(Buffs.AtgMissileCD, Configuration.AtgMissileCooldown.Value);
                                 body.AddBuff(Buffs.AtgMissile);
@@ -118,7 +120,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyUkelele.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.Ukelele) < 5)
+                            if (body.GetBuffCount(Buffs.Ukelele) < Configuration.UkeleleStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.UkeleleCD)) body.AddTimedBuff(Buffs.UkeleleCD, Configuration.UkeleleCooldown.Value);
                                 body.AddBuff(Buffs.Ukelele);
@@ -169,7 +171,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyMeathook.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.MeatHook) < 5)
+                            if (body.GetBuffCount(Buffs.MeatHook) < Configuration.MeathookStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.MeatHookCD)) body.AddTimedBuff(Buffs.MeatHookCD, Configuration.MeathookCooldown.Value);
                                 body.AddBuff(Buffs.MeatHook);
@@ -205,7 +207,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyMoltenPerforator.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.MoltenPerforator) < 5)
+                            if (body.GetBuffCount(Buffs.MoltenPerforator) < Configuration.MoltenPerforatorStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.MoltenPerforatorCD)) body.AddTimedBuff(Buffs.MoltenPerforatorCD, Configuration.MoltenPerforatorCooldown.Value);
                                 body.AddBuff(Buffs.MoltenPerforator);
@@ -241,7 +243,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyChargedPerforator.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.ChargedPerforator) < 5)
+                            if (body.GetBuffCount(Buffs.ChargedPerforator) < Configuration.ChargedPerforatorStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.ChargedPerforatorCD)) body.AddTimedBuff(Buffs.ChargedPerforatorCD, Configuration.ChargedPerforatorCooldown.Value);
                                 body.AddBuff(Buffs.ChargedPerforator);
@@ -277,7 +279,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyPolylute.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if (body.GetBuffCount(Buffs.PolyLute) < 5)
+                            if (body.GetBuffCount(Buffs.PolyLute) < Configuration.PolyluteStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.PolyLuteCD)) body.AddTimedBuff(Buffs.PolyLuteCD, Configuration.PolyluteCooldown.Value);
                                 body.AddBuff(Buffs.PolyLute);
@@ -310,7 +312,7 @@ namespace ProcLimiter
                         if (Configuration.ApplyPlasmaShrimp.Value && Configuration.ApplyAllChanges.Value)
                         {
                             CharacterBody body = master.GetBody();
-                            if(body.GetBuffCount(Buffs.PlasmaShrimp) < 5)
+                            if(body.GetBuffCount(Buffs.PlasmaShrimp) < Configuration.PlasmaShrimpStack.Value)
                             {
                                 if (!body.HasBuff(Buffs.PlasmaShrimpCD)) body.AddTimedBuff(Buffs.PlasmaShrimpCD, Configuration.PlasmaShrimpCooldown.Value);
                                 body.AddBuff(Buffs.PlasmaShrimp);
@@ -349,10 +351,8 @@ namespace ProcLimiter
         {
             On.RoR2.CharacterBody.UpdateBuffs += (orig, body, deltaTime) =>
             {
-
                 for (int i = body.timedBuffs.Count - 1; i >= 0; i--)
                 {
-                    
                     CharacterBody.TimedBuff timedBuff = body.timedBuffs[i];
                     if(timedBuff.timer - deltaTime <= 0f)
                     {
@@ -379,8 +379,20 @@ namespace ProcLimiter
                 }
 
                 orig.Invoke(body, deltaTime);
-
             };
+        }
+
+        private static void UpdateBuff(ref BuffDef buff, bool isHidden)
+        {
+            foreach (BuffDef Buff in BuffCatalog.buffDefs)
+            {
+                if (Buff.buffIndex == buff.buffIndex)
+                {
+                    Buff.isHidden = isHidden;
+                }
+            }
+            buff.isHidden = isHidden;
+
         }
 
 

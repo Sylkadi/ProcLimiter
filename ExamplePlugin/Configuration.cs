@@ -14,24 +14,18 @@ namespace ProcLimiter
         public static ConfigEntry<float> StickyBombCooldown, AtgMissileCooldown, UkeleleCooldown, MeathookCooldown, MoltenPerforatorCooldown, ChargedPerforatorCooldown, PolyluteCooldown, PlasmaShrimpCooldown, NkuhanaCooldown;
         public static ConfigEntry<int> StickyBombStack, AtgMissileStack, UkeleleStack, MeathookStack, MoltenPerforatorStack, ChargedPerforatorStack, PolyluteStack, PlasmaShrimpStack;
 
-
         public static void Initalize()
         {
-            // Load Mod Icon Sprite
-            Sprite modIcon;
-            AssetBundle bundle;
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ProcLimiter.icon")) bundle = AssetBundle.LoadFromStream(stream);
-            modIcon = bundle.LoadAsset<Sprite>("Assets/icon.png");
 
-
+            // Bind to config
             ApplyAllChanges = Main.Config.Bind("General", "Apply all changes?", true, "Apply all cooldown changes to items?");
 
             ApplyStickyBomb = Main.Config.Bind("Sticky Bomb", "Enable Changes?", true, "Give cooldown?");
             StickyBombCooldown = Main.Config.Bind("Sticky Bomb", "Cooldown time", 0.2f, "How long the cooldown is in seconds.");
             StickyBombStack = Main.Config.Bind("Sticky Bomb", "Stack count", 20, "How many times can this item proc before it stops procing. 1 stack is removed every cooldown interval.");
 
-            ApplyAtgMissile = Main.Config.Bind("Atg Missle", "Enable Changes?", true, "Give cooldown?");
-            AtgMissileCooldown = Main.Config.Bind("Atg Missle", "Cooldown time", 0.25f, "How long the cooldown is in seconds.");
+            ApplyAtgMissile = Main.Config.Bind("Atg Missile", "Enable Changes?", true, "Give cooldown?");
+            AtgMissileCooldown = Main.Config.Bind("Atg Missile", "Cooldown time", 0.25f, "How long the cooldown is in seconds.");
             AtgMissileStack = Main.Config.Bind("Atg Missile", "Stack count", 10, "How many times can this item proc before it stops procing. 1 stack is removed every cooldown interval.");
 
             ApplyUkelele = Main.Config.Bind("Ukelele", "Enable Changes?", true, "Give cooldown?");
@@ -61,7 +55,8 @@ namespace ProcLimiter
             ApplyNkuhana = Main.Config.Bind("Nkuhanas Opinion", "Enable Changes?", true, "Give cooldown?");
             NkuhanaCooldown = Main.Config.Bind("Nkuhanas Opinion", "Cooldown time", 0.15f, "How long the cooldown is in seconds.");
 
-            ModSettingsManager.SetModIcon(modIcon);
+            // Risk of options
+            ModSettingsManager.SetModIcon(Main.bundle.LoadAsset<Sprite>("Assets/Icons/Mod_Icon.png")); // Set icon
 
             StepSliderConfig stepSlider = new StepSliderConfig { min = 0, max = 2, increment = 0.01f, formatString = "{0}s" };
             IntSliderConfig intSlider = new IntSliderConfig { min = 1, max = 50 };

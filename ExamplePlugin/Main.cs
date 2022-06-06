@@ -20,14 +20,19 @@ namespace ProcLimiter
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Drinkable";
         public const string PluginName = "ProcLimiter";
-        public const string PluginVersion = "1.1.0";
+        public const string PluginVersion = "1.1.1";
 
         public static ConfigFile Config;
+        public static AssetBundle bundle;
 
         public void Awake()
         {
             // Initalize
             Log.Initalize(Logger);
+
+            // Load Bundle
+            using (var stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ProcLimiter.icons")) bundle = AssetBundle.LoadFromStream(stream);
+
             Buffs.Initalize();
 
             // Config

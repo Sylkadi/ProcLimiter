@@ -19,10 +19,11 @@
 
 	<ItemGroup>
 	  <None Remove="icon" />
+	  <None Remove="icons" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="icon" />
+	  <EmbeddedResource Include="icons" />
 	</ItemGroup>
 
 	<ItemGroup>

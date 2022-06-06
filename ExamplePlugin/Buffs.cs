@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RoR2;
 using UnityEngine;
+using System.Reflection;
 
 namespace ProcLimiter
 {
@@ -13,6 +14,7 @@ namespace ProcLimiter
 
         public static void Initalize()
         {
+
             BuffDef[]
                 buffsNoCooldown = new BuffDef[] { StickyBomb, AtgMissile, Ukelele, MeatHook, MoltenPerforator, ChargedPerforator, PolyLute, PlasmaShrimp },
                 buffsCooldown = new BuffDef[] { StickyBombCD, AtgMissileCD, UkeleleCD, MeatHookCD, MoltenPerforatorCD, ChargedPerforatorCD, PolyLuteCD, PlasmaShrimpCD };
@@ -41,7 +43,7 @@ namespace ProcLimiter
                     canStack = true,
                     isCooldown = false,
                     isDebuff = false,
-                    isHidden = true
+                    isHidden = false
                 };
             }
             for (int i = 0; i != buffsCooldown.Length; i++)
