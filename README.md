@@ -10,6 +10,11 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 
 ## Changelog
 
+**1.1.1**
+
+* Fixed Typo
+* Fixed stacking count not registering(i am a retard)
+
 **1.1.0**
 
 * Implemented Stacking
