@@ -10,9 +10,22 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 
 ## Changelog
 
+**1.2.0**
+
+* Added buff icons for stacking
+
+**1.1.1**
+
+* Fixed Typo
+* Fixed stacking count not registering
+
 **1.1.0**
 
 * Implemented Stacking
+
+**1.0.2**
+
+* Fixed Risk_Of_Options not working
 
 **1.0.1**
 

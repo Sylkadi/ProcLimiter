@@ -3,7 +3,6 @@ using RoR2;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using BepInEx.Configuration;
-using System.Linq;
 
 namespace ProcLimiter
 {
@@ -382,17 +381,23 @@ namespace ProcLimiter
             };
         }
 
-        private static void UpdateBuff(ref BuffDef buff, bool isHidden)
+        private static void UpdateBuffVisibility(BuffDef buff, bool value)
         {
-            foreach (BuffDef Buff in BuffCatalog.buffDefs)
-            {
-                if (Buff.buffIndex == buff.buffIndex)
-                {
-                    Buff.isHidden = isHidden;
-                }
-            }
-            buff.isHidden = isHidden;
+            BuffDef[] newBuffDefs = BuffCatalog.buffDefs;
+            newBuffDefs[(int)buff.buffIndex].isHidden = value;
+            BuffCatalog.SetBuffDefs(newBuffDefs);
+        }
 
+        public static void ShowBuffsEvents()
+        {
+            Configuration.ShowStickyBomb.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.StickyBomb, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowAtgMissile.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.AtgMissile, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowUkelele.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.Ukelele, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowMeathook.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.MeatHook, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowMoltenPerforator.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.MoltenPerforator, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowChargedPerforator.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.ChargedPerforator, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowPolylute.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.PolyLute, (obj as ConfigEntry<bool>).Value);
+            Configuration.ShowPlasmaShrimp.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.PlasmaShrimp, (obj as ConfigEntry<bool>).Value);
         }
 
 

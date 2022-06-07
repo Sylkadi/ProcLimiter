@@ -1,11 +1,12 @@
 ﻿{
 	"name": "ProcLimiter",
-	"version_number": "1.0",
+	"version_number": "1.2.0",
 	"website_url": "https://github.com/Sylkadi/ProcLimiter",
-	"description": "Gives certain items cooldowns, helps reduce lag in the late game.",
+	"description": "Gives certain items cooldowns, helps reduce lag in the late game. Configurable in game with Risk of options.",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.9",
 		"tristanmcpherson-R2API-4.3.21",
-		"RiskofThunder-HookGenPatcher-1.2.1"
+		"RiskofThunder-HookGenPatcher-1.2.1",
+		"Rune580-Risk_Of_Options-2.5.2"
 	]
 }

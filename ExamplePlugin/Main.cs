@@ -1,26 +1,22 @@
 using BepInEx;
 using R2API;
 using R2API.Utils;
-using RoR2;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using BepInEx.Configuration;
-using RiskOfOptions.OptionConfigs;
-using RiskOfOptions;
 
 namespace ProcLimiter
 {
 
     [BepInDependency(R2API.R2API.PluginGUID)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-    [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI))]
+    [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI), nameof(ContentAddition))]
     public class Main : BaseUnityPlugin
     {
 
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Drinkable";
         public const string PluginName = "ProcLimiter";
-        public const string PluginVersion = "1.1.1";
+        public const string PluginVersion = "1.2.0";
 
         public static ConfigFile Config;
         public static AssetBundle bundle;
@@ -33,11 +29,12 @@ namespace ProcLimiter
             // Load Bundle
             using (var stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ProcLimiter.icons")) bundle = AssetBundle.LoadFromStream(stream);
 
-            Buffs.Initalize();
-
             // Config
             Config = new ConfigFile(Paths.ConfigPath + "\\" + PluginName + ".cfg", true);
             Configuration.Initalize();
+
+            // Buffs
+            Buffs.Initalize();
 
             // Cil Changes
             Changes.Cil.GetMasterLocation();
@@ -53,6 +50,7 @@ namespace ProcLimiter
 
             // Other Changes
             Changes.OnRemoveBuff();
+            Changes.ShowBuffsEvents();
 
             // Say done
             Log.LogInfo(PluginName + ": Awake done");
