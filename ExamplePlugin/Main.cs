@@ -1,22 +1,18 @@
 using BepInEx;
-using R2API;
-using R2API.Utils;
 using UnityEngine;
 using BepInEx.Configuration;
 
 namespace ProcLimiter
 {
-
-    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency("com.rune580.riskofoptions")]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-    [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI), nameof(ContentAddition))]
     public class Main : BaseUnityPlugin
     {
 
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Drinkable";
         public const string PluginName = "ProcLimiter";
-        public const string PluginVersion = "1.2.0";
+        public const string PluginVersion = "1.2.1";
 
         public static ConfigFile Config;
         public static AssetBundle bundle;
@@ -34,7 +30,7 @@ namespace ProcLimiter
             Configuration.Initalize();
 
             // Buffs
-            Buffs.Initalize();
+            Changes.AddBuffsOnInit();
 
             // Cil Changes
             Changes.Cil.GetMasterLocation();
@@ -54,7 +50,6 @@ namespace ProcLimiter
 
             // Say done
             Log.LogInfo(PluginName + ": Awake done");
-
         }
     }
 }

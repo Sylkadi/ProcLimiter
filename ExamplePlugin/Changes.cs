@@ -45,7 +45,7 @@ namespace ProcLimiter
                     c.Emit(OpCodes.Ldloc, masterLocation);
                     c.EmitDelegate<Func<int, DamageInfo, CharacterMaster, bool>>((itemCount, damageInfo, master) => {
                         bool roll = Util.CheckRoll(5f * itemCount * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyStickyBomb.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyStickyBomb.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if(body.GetBuffCount(Buffs.StickyBomb) < Configuration.StickyBombStack.Value)
@@ -66,7 +66,9 @@ namespace ProcLimiter
                 {
                     ILCursor c = new ILCursor(il);
 
-                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "Missile"));
+                    int num = 0;
+
+                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "Missile"), v => v.MatchCallOrCallvirt<Inventory>("GetItemCount"), v => v.MatchStloc(out num));
                     c.GotoNext(
                         v => v.MatchLdcR4(10),
                         v => v.MatchLdarg(1),
@@ -78,9 +80,10 @@ namespace ProcLimiter
                     c.RemoveRange(6);
                     c.Emit(OpCodes.Ldarg_1);
                     c.Emit(OpCodes.Ldloc, masterLocation);
-                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
+                    c.Emit(OpCodes.Ldloc, num);
+                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, int, bool>>((damageInfo, master, itemCount) => {
                         bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyAtgMissile.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyAtgMissile.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.AtgMissile) < Configuration.AtgMissileStack.Value)
@@ -102,7 +105,9 @@ namespace ProcLimiter
                 {
                     ILCursor c = new ILCursor(il);
 
-                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "ChainLightning"));
+                    int num = 0;
+
+                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "ChainLightning"), v => v.MatchCallOrCallvirt<Inventory>("GetItemCount"), v => v.MatchStloc(out num));
                     c.GotoNext(
                         v => v.MatchLdarg(1),
                         v => v.MatchLdfld<DamageInfo>("procCoefficient"),
@@ -114,9 +119,10 @@ namespace ProcLimiter
                     c.RemoveRange(6);
                     c.Emit(OpCodes.Ldarg_1);
                     c.Emit(OpCodes.Ldloc, masterLocation);
-                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
+                    c.Emit(OpCodes.Ldloc, num);
+                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, int, bool>>((damageInfo, master, itemCount) => {
                         bool roll = Util.CheckRoll(25f * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyUkelele.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyUkelele.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.Ukelele) < Configuration.UkeleleStack.Value)
@@ -167,7 +173,7 @@ namespace ProcLimiter
                     c.EmitDelegate<Func<int, DamageInfo, CharacterMaster, bool>>((itemCount, damageInfo, master) => {
                         float chance = (1f - 100f / (100f + 20f * itemCount)) * 100f;
                         bool roll = Util.CheckRoll(chance * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyMeathook.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyMeathook.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.MeatHook) < Configuration.MeathookStack.Value)
@@ -189,7 +195,9 @@ namespace ProcLimiter
                 {
                     ILCursor c = new ILCursor(il);
 
-                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "FireballsOnHit"));
+                    int num = 0;
+
+                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "FireballsOnHit"), v => v.MatchCallOrCallvirt<Inventory>("GetItemCount"), v => v.MatchStloc(out num));
                     c.GotoNext(
                         v => v.MatchLdcR4(10),
                         v => v.MatchLdarg(1),
@@ -201,9 +209,10 @@ namespace ProcLimiter
                     c.RemoveRange(6);
                     c.Emit(OpCodes.Ldarg_1);
                     c.Emit(OpCodes.Ldloc, masterLocation);
-                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
+                    c.Emit(OpCodes.Ldloc, num);
+                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, int, bool>>((damageInfo, master, itemCount) => {
                         bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyMoltenPerforator.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyMoltenPerforator.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.MoltenPerforator) < Configuration.MoltenPerforatorStack.Value)
@@ -225,7 +234,9 @@ namespace ProcLimiter
                 {
                     ILCursor c = new ILCursor(il);
 
-                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "LightningStrikeOnHit"));
+                    int num = 0;
+
+                    c.GotoNext(v => v.MatchLdsfld("RoR2.RoR2Content/Items", "LightningStrikeOnHit"), v => v.MatchCallOrCallvirt<Inventory>("GetItemCount"), v => v.MatchStloc(out num));
                     c.GotoNext(
                         v => v.MatchLdcR4(10),
                         v => v.MatchLdarg(1),
@@ -237,9 +248,10 @@ namespace ProcLimiter
                     c.RemoveRange(6);
                     c.Emit(OpCodes.Ldarg_1);
                     c.Emit(OpCodes.Ldloc, masterLocation);
-                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
+                    c.Emit(OpCodes.Ldloc, num);
+                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, int, bool>>((damageInfo, master, itemCount) => {
                         bool roll = Util.CheckRoll(10f * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyChargedPerforator.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyChargedPerforator.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.ChargedPerforator) < Configuration.ChargedPerforatorStack.Value)
@@ -261,7 +273,9 @@ namespace ProcLimiter
                 {
                     ILCursor c = new ILCursor(il);
 
-                    c.GotoNext(v => v.MatchLdsfld("RoR2.DLC1Content/Items", "ChainLightningVoid"));
+                    int num = 0;
+
+                    c.GotoNext(v => v.MatchLdsfld("RoR2.DLC1Content/Items", "ChainLightningVoid"), v => v.MatchCallOrCallvirt<Inventory>("GetItemCount"), v => v.MatchStloc(out num));
                     c.GotoNext(
                         v => v.MatchLdarg(1),
                         v => v.MatchLdfld<DamageInfo>("procCoefficient"),
@@ -273,9 +287,10 @@ namespace ProcLimiter
                     c.RemoveRange(6);
                     c.Emit(OpCodes.Ldarg_1);
                     c.Emit(OpCodes.Ldloc, masterLocation);
-                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, bool>>((damageInfo, master) => {
+                    c.Emit(OpCodes.Ldloc, num);
+                    c.EmitDelegate<Func<DamageInfo, CharacterMaster, int, bool>>((damageInfo, master, itemCount) => {
                         bool roll = Util.CheckRoll(25f * damageInfo.procCoefficient, master);
-                        if (Configuration.ApplyPolylute.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyPolylute.Value && Configuration.ApplyAllChanges.Value && itemCount > 0 && roll)
                         {
                             CharacterBody body = master.GetBody();
                             if (body.GetBuffCount(Buffs.PolyLute) < Configuration.PolyluteStack.Value)
@@ -308,7 +323,7 @@ namespace ProcLimiter
                     c.Emit(OpCodes.Ldloc, masterLocation);
                     c.EmitDelegate<Func<int, CharacterMaster, int>>((itemCount, master) => {
                         int roll = itemCount;
-                        if (Configuration.ApplyPlasmaShrimp.Value && Configuration.ApplyAllChanges.Value)
+                        if (Configuration.ApplyPlasmaShrimp.Value && Configuration.ApplyAllChanges.Value && itemCount > 0)
                         {
                             CharacterBody body = master.GetBody();
                             if(body.GetBuffCount(Buffs.PlasmaShrimp) < Configuration.PlasmaShrimpStack.Value)
@@ -400,6 +415,13 @@ namespace ProcLimiter
             Configuration.ShowPlasmaShrimp.SettingChanged += (obj, e) => UpdateBuffVisibility(Buffs.PlasmaShrimp, (obj as ConfigEntry<bool>).Value);
         }
 
-
+        public static void AddBuffsOnInit()
+        {
+            On.RoR2.BuffCatalog.Init += (orig) =>
+            {
+                orig.Invoke();
+                Buffs.Initalize();
+            };
+        }
     }
 }

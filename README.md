@@ -10,6 +10,11 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 
 ## Changelog
 
+**1.2.1**
+
+* Stacks should work properly now
+* Removed Useless Dependencies
+
 **1.2.0**
 
 * Added buff icons for stacking

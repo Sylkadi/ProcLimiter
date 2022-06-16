@@ -1,4 +1,5 @@
-﻿using BepInEx.Configuration;
+﻿using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
@@ -52,8 +53,7 @@ namespace ProcLimiter
             ModSettingsManager.SetModIcon(Main.bundle.LoadAsset<Sprite>("Assets/Icons/Mod_Icon.png")); // Set icon
 
             ModSettingsManager.AddOption(new CheckBoxOption(ApplyNkuhana));
-            ModSettingsManager.AddOption(new StepSliderOption(NkuhanaCooldown, new StepSliderConfig { min = 0.1f, max = 2, increment = 0.01f, formatString = "{0}s"}));
-
+            ModSettingsManager.AddOption(new StepSliderOption(NkuhanaCooldown, new StepSliderConfig { min = 0.1f, max = 2, increment = 0.01f, formatString = "{0}s" }));
         }
     }
 }

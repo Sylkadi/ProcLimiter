@@ -1,5 +1,4 @@
-﻿using R2API;
-using RoR2;
+﻿using RoR2;
 using UnityEngine;
 
 namespace ProcLimiter
@@ -59,7 +58,10 @@ namespace ProcLimiter
 
         private static void AddBuffDefs(params BuffDef[] buffs)
         {
-            foreach (BuffDef buff in buffs) ContentAddition.AddBuffDef(buff);
+            BuffDef[] newBuffDefs = new BuffDef[BuffCatalog.buffDefs.Length + buffs.Length];
+            for (int i = 0; i != BuffCatalog.buffDefs.Length; i++) newBuffDefs[i] = BuffCatalog.buffDefs[i];
+            for (int i = 0; i != buffs.Length; i++) newBuffDefs[i + BuffCatalog.buffDefs.Length] = buffs[i];
+            BuffCatalog.SetBuffDefs(newBuffDefs);
         }
     }
 }
