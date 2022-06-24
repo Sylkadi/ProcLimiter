@@ -47,7 +47,7 @@ namespace ProcLimiter
             BindBasicOptions(ref ApplyPolylute, ref PolyluteCooldown, ref PolyluteStack, ref ShowPolylute, 0.3f, 5, "Polylute");
             BindBasicOptions(ref ApplyPlasmaShrimp, ref PlasmaShrimpCooldown, ref PlasmaShrimpStack, ref ShowPlasmaShrimp, 0.1f, 20, "Plasma Shrimp");
 
-            ApplyNkuhana = Main.Config.Bind("Nkuhanas Opinion", "Enable Changes?", true, "Give cooldown?");
+            ApplyNkuhana = Main.Config.Bind("Nkuhanas Opinion", "Enable Changes?", false, "Give cooldown?");
             NkuhanaCooldown = Main.Config.Bind("Nkuhanas Opinion", "Cooldown time", 0.15f, "How long the cooldown is in seconds.");
 
             ModSettingsManager.SetModIcon(Main.bundle.LoadAsset<Sprite>("Assets/Icons/Mod_Icon.png")); // Set icon

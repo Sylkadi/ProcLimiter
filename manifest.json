@@ -1,6 +1,6 @@
 ﻿{
 	"name": "ProcLimiter",
-	"version_number": "1.2.1",
+	"version_number": "1.2.2",
 	"website_url": "https://github.com/Sylkadi/ProcLimiter",
 	"description": "Gives certain items cooldowns, helps reduce lag in the late game. Configurable in game with Risk of options.",
 	"dependencies": [
