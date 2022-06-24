@@ -10,6 +10,12 @@ If theres any bugs or suggestions you can dm me on discord at Sylkadi#5181
 
 ## Changelog
 
+**1.2.2**
+
+* Added error handling for better mod compatibility.
+* Slightly restructured the code.
+* Nkuhana changes is now disabled by default.
+
 **1.2.1**
 
 * Stacks should work properly now
